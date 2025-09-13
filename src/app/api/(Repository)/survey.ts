@@ -16,3 +16,10 @@ export const getSurveys = async () => {
   });
   return surveys;
 };
+
+export const deleteSurvey = async (id: string) => {
+  const survey = await prisma.survey.delete({
+    where: { id },
+  });
+  return survey;
+};

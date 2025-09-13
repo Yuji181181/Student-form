@@ -1,3 +1,42 @@
 {
-  "postman.settings.dotenv-detection-notification-visibility": false
+  "postman.settings.dotenv-detection-notification-visibility": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "README.md": true,
+    ".github": true,
+    ".vscode": true,
+    "init-db.sh": true,
+    "tsconfig.json": true,
+    "postcss.config.mjs": true,
+    "package-lock.json": true,
+    "next.config.ts": true,
+    ".gitignore": true,
+    "biome.json": true,
+    "components.json": true,
+    "docker-compose.yml": true,
+    "public": true,
+    "node_modules": true,
+    ".next": true
+  },
+  "hide-files.files": [
+    "README.md",
+    ".github",
+    ".vscode",
+    "init-db.sh",
+    "tsconfig.json",
+    "postcss.config.mjs",
+    "package-lock.json",
+    "next.config.ts",
+    ".gitignore",
+    "biome.json",
+    "components.json",
+    "docker-compose.yml",
+    "public",
+    "node_modules",
+    ".next"
+  ]
 }

@@ -19,3 +19,8 @@ export const surveyListSchema = z.array(
     }),
   }),
 );
+
+export const deleteSurveyResponseSchema = z.object({
+  id: z.string(),
+  message: z.string(),
+});
