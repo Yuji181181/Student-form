@@ -9,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
 import { formatDate } from "@/lib/formatter";
 import type { surveyListSchema } from "@/schemas/api/survey";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type React from "react";
 import type { z } from "zod";
@@ -22,6 +23,8 @@ interface SurveyCardProps {
 
 export const SurveyCard: React.FC<SurveyCardProps> = (props) => {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const canEdit = session?.user?.id === props.survey.user.id;
   return (
     <Card
       key={props.survey.id}
@@ -73,10 +76,26 @@ export const SurveyCard: React.FC<SurveyCardProps> = (props) => {
                 window.open(props.survey.googleFormUrl, "_blank");
               }}
               className="gap-1"
+              title="Googleフォームを新しいタブで開く"
             >
               <ExternalLink className="h-4 w-4" />
               回答する
             </Button>
+            {canEdit && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/survey/${props.survey.id}/edit`);
+                }}
+                className="gap-1"
+                title="この投稿を編集"
+              >
+                <Pencil className="h-4 w-4" />
+                編集
+              </Button>
+            )}
           </div>
         </div>
       </CardContent>

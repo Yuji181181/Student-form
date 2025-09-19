@@ -1,3 +1,4 @@
+import FabCreateButton from "@/components/common/FabCreateButton";
 import Header from "@/components/common/Header";
 import type React from "react";
 
@@ -7,9 +8,10 @@ export default function AuthenticatedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      {children}
+      <div className="flex-1">{children}</div>
+      <FabCreateButton />
     </div>
   );
 }

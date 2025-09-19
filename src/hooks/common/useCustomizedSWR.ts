@@ -32,10 +32,28 @@ const reviveDates = (input: unknown): unknown => {
   return input;
 };
 
+export class HttpError extends Error {
+  status: number;
+  statusText: string;
+  url: string;
+  constructor(
+    status: number,
+    statusText: string,
+    url: string,
+    message?: string,
+  ) {
+    super(message ?? `Request failed: ${status} ${statusText}`);
+    this.name = "HttpError";
+    this.status = status;
+    this.statusText = statusText;
+    this.url = url;
+  }
+}
+
 const defaultFetcher = async (url: string): Promise<ResBody<unknown>> => {
   const response = await fetch(url, { credentials: "include" });
   if (!response.ok) {
-    throw new Error(`Request failed: ${response.status}`);
+    throw new HttpError(response.status, response.statusText, url);
   }
   const json = (await response.json()) as ResBody<unknown>;
   return json;
@@ -48,6 +66,7 @@ export const useCustomizedSWR = <T>(
   data: T | undefined;
   isLoading: boolean;
   isError: boolean;
+  error: Error | undefined;
   mutate: KeyedMutator<ResBody<unknown>>;
 } => {
   const {
@@ -76,6 +95,7 @@ export const useCustomizedSWR = <T>(
     data: parsed,
     isLoading,
     isError: Boolean(error),
+    error: error as Error | undefined,
     mutate,
   } as const;
 };

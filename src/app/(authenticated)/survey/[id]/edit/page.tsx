@@ -1,4 +1,4 @@
-import SurveyDetailPage from "@/components/domain/(authenticated)/survey/SurveyDetailPage";
+import EditSurveyPage from "@/components/domain/(authenticated)/survey/EditSurveyPage";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -6,7 +6,7 @@ interface PageProps {
 
 const Page = async (props: PageProps) => {
   const { id } = await props.params;
-  return <SurveyDetailPage id={id} />;
+  return <EditSurveyPage id={id} />;
 };
 
 export default Page;

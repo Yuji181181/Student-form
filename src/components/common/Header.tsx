@@ -7,6 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { Coins, Users } from "lucide-react";
 import { redirect } from "next/navigation";
 
+import Link from "next/link";
+
 export default async function Header() {
   const userId = await userAuthenticationCheck();
   if (!userId) redirect("/login");
@@ -20,9 +22,11 @@ export default async function Header() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Users className="h-5 w-5 text-primary-foreground" />
             </div>
-            <h1 className="font-bold text-2xl text-foreground">
-              アンケート共有掲示板
-            </h1>
+            <Link href="/">
+              <h1 className="cursor-pointer font-bold text-2xl text-foreground">
+                アンケート共有掲示板
+              </h1>
+            </Link>
           </div>
 
           {user && (
